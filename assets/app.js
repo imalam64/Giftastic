@@ -40,13 +40,49 @@ $(document).ready(function(){
     //It will also pull the image rating and display it above the image
     //Finally it will have a play/pause functionality for the user
 
-    /* $('#searchButton').on('click', function() {
-        var starWars = $(this).data('name');
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + starWars + "&api_key=tY3kykAKF4BORze5adGtAziQjfy0PYhz&limit=10";
+    $('#searchButton').on('click', function() {
+        $('#display').empty();
+
+        var searchIt = $(this).attr('data-name');
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + 
+        searchIt + "&api_key=tY3kykAKF4BORze5adGtAziQjfy0PYhz&limit=10";
 
         $.ajax({
             url: queryURL,
             method: 'GET'
         })
-    }) */
+        .done(function(response) {
+        console.log(response)
+
+            var results = response.data;
+
+            for (var i = 0; i < results.length; i++) {
+
+                var starDiv = $('<div/>');
+                var p =$('<p/>');
+                p.text(results[i].rating);
+                var starImage = $('<img/>');
+                starImage.addClass('anImg')
+                starImage.attr('src', results[i].images.fixed_height.url);
+                starImage.attr('data-still', results[i].images.fixed_height_still.url)
+                starImage.attr('data-animate', results[i].images.fixed_height.url)
+                .attr('data-state', 'still');
+                starDiv.append(p);
+                starDiv.append(starImage);
+                starDiv.prependTo($('#display'));
+            }
+
+            $('.anImg').on('click', function() {
+                var state = $(this).attr('data-state'); 
+                console.log(this);
+                if (state == 'still') {
+                $(this).attr('src', $(this).data('animate'));               
+                $(this).attr('data-state', 'animate');
+                } else {
+                $(this).attr('src', $(this).data('still'));                
+                $(this).attr('data-state', 'still');
+                }      
+            });
+        });
+});
 })
