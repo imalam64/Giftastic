@@ -1,3 +1,7 @@
 button{
-    margin: 1rem;
+    margin: 0 1rem 1rem 0;
+}
+
+#searchButton{
+    margin: 1rem 0 5px 0;
 }

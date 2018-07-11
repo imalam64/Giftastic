@@ -16,18 +16,29 @@ $(document).ready(function(){
         }
     };
 
+   
     //Creating a function to handle a new button addittion
     $("#addTopic").on("click", function(event) {
         event.preventDefault();
 
         var topic = $('#topicInput').val().trim();
-
+        if (topic == "") {
+            alert("Enter a search term!");
+            return false;
+        }
+        else{
         topics.push(topic);
-
         renderButtons();
+        };
     });
 
     renderButtons();
+
+    //Creating a click functions that utilizes the Giphy API to search based on the button name
+    //The function should search their database and pull 10 results 
+    //It will then populate those 10 images on to a grid
+    //It will also pull the image rating and display it above the image
+    //Finally it will have a play/pause functionality for the user
 
     /* $('#searchButton').on('click', function() {
         var starWars = $(this).data('name');

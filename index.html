@@ -11,24 +11,28 @@
 </head>
 <body>
     <div class="container">
-    <div id="searchButton">
-        <!--This is where I will store array of search buttons for the user-->
+    <div class="row">
+        <div id="searchButton">
+            <!--This is where I will store array of search buttons for the user-->
+        </div>
     </div>
 
-    <div id="display">
-        <!--This is where the images that are pulled from Giphy API will be displayed-->
-    </div>
+    <div class="row">
+        <div class="col-sm-8" id="display">
+            <!--This is where the images that are pulled from Giphy API will be displayed-->
+        </div>
 
-    <div id="adder">
-        <!--This is where the user can add more search buttons-->
-        <h3>
-            Add a search button on a Star Wars!
-        </h3>
-        <form>
-            <label for="topicInput"></label>
-            <input type="text" value="" id="topicInput"><br><br>
-            <input type="submit" name="Button" class="btn btn-success" id="addTopic" style="margin-left:8px">
-        </form>
+        <div class="col-sm-4" id="adder">
+            <!--This is where the user can add more search buttons-->
+            <h3>
+                Add a search button on a Star Wars topic!
+            </h3>
+            <form>
+                <label for="topicInput"></label>
+                <input type="text" value="" id="topicInput"><br><br>
+                <input type="submit" name="Button" class="btn btn-success" id="addTopic">
+            </form>
+        </div>
     </div>
     </div>
 
