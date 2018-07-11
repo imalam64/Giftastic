@@ -25,49 +25,50 @@ renderButtons();
 //Finally it will have a play/pause functionality for the user
 
 function theGIFSearcher(){ $('.starWars').on('click', function() {
-    $('#display').empty();
+$('#display').empty();
 
-    var searchIt = $(this).attr('search-name');
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + 
-    searchIt + "&api_key=tY3kykAKF4BORze5adGtAziQjfy0PYhz&limit=10";
+var searchIt = $(this).attr('search-name');
+var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + 
+searchIt + "&api_key=tY3kykAKF4BORze5adGtAziQjfy0PYhz&limit=10";
 
-    $.ajax({
-        url: queryURL,
-        method: 'GET'
-    })
-    
-    .then(function(response) {
+$.ajax({
+    url: queryURL,
+    method: 'GET'
+})
+
+.then(function(response) {
     console.log(response)
 
-        var results = response.data;
+    var results = response.data;
 
-        for (var i = 0; i < results.length; i++) {
+    for (var i = 0; i < results.length; i++) {
+        var starDiv = $('<div/>');
+        var p = $("<p>").text("Rating: " + results[i].rating.toUpperCase());
+        var starImage = $('<img/>');
+        starImage.addClass('anImg');
+        starImage.attr('data-state', 'still');
+        starImage.attr('src', results[i].images.fixed_height_still
+        .url);
+        starImage.attr('data-still', results[i].images.fixed_height_still.url)
+        starImage.attr('data-animate', results[i].images.fixed_height.url)
+        starDiv.append(p);
+        starDiv.append(starImage);
+        starDiv.prependTo($('#display'));
+    }
 
-            var starDiv = $('<div/>');
-            var p = $("<p>").text("Rating: " + results[i].rating.toUpperCase());
-            var starImage = $('<img/>');
-            starImage.addClass('anImg');
-            starImage.attr('data-state', 'still');
-            starImage.attr('src', results[i].images.fixed_height_still.url);
-            starImage.attr('data-still', results[i].images.fixed_height_still.url)
-            starImage.attr('data-animate', results[i].images.fixed_height.url)
-            starDiv.append(p);
-            starDiv.append(starImage);
-            starDiv.prependTo($('#display'));
-        }
-
-        $('.anImg').on('click', function() {
-            var state = $(this).attr('data-state'); 
-            console.log(this);
-            if (state == 'still') {
-            $(this).attr('src', $(this).data('animate'));               
-            $(this).attr('data-state', 'animate');
-            } else {
-            $(this).attr('src', $(this).data('still'));                
-            $(this).attr('data-state', 'still');
-            }      
-        });
+    $('.anImg').on('click', function() {
+        var state = $(this).attr('data-state'); 
+        console.log(this);
+        if (state == 'still') {
+        $(this).attr('src', $(this).data('animate'));               
+        $(this).attr('data-state', 'animate');
+        } else {
+        $(this).attr('src', $(this).data('still'));                
+        $(this).attr('data-state', 'still');
+        }      
     });
+});
+
 })};
 
 theGIFSearcher();
@@ -84,6 +85,7 @@ $("#addTopic").on("click", function(event) {
     }
     else{
     topics.push(topic);
+    $('#topicInput').val('');
     renderButtons();
     theGIFSearcher();
     };
