@@ -29,7 +29,7 @@ $('#display').empty();
 
 var searchIt = $(this).attr('search-name');
 var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + 
-searchIt + "&api_key=tY3kykAKF4BORze5adGtAziQjfy0PYhz&limit=10";
+searchIt + "&api_key=tY3kykAKF4BORze5adGtAziQjfy0PYhz&limit=10&rating=g";
 
 $.ajax({
     url: queryURL,
